@@ -19,14 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class Templines_Button extends Widget_Base {
+class Templines_Featured_New_Button extends Widget_Base {
 
     public function get_name() {
-        return 'templines-button-simple';
+        return 'templines-button-new';
     }
 
     public function get_title() {
-        return esc_html__( 'Button', 'templines-helper-core' );
+        return esc_html__( 'Button new', 'templines-helper-core' );
     }
 
     public function get_icon() {
@@ -36,6 +36,16 @@ class Templines_Button extends Widget_Base {
     public function get_categories() {
         return array('templines-helper-core-elements');
     }
+	
+	public function get_style_depends() {
+
+		wp_register_style( 'featured_reviews', plugins_url( '../assets/css/featured_new_button.css', __FILE__ ) );
+
+		return [
+			'featured_reviews',
+		];
+
+	}
 
     protected function register_controls() {
         $this->start_controls_section(
@@ -66,7 +76,36 @@ class Templines_Button extends Widget_Base {
                 ],
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .page-builder-button-wrap' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .wrapper_link' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
+		
+			$this->add_control(
+            'icon_svg_three',
+            [
+                'label'            => __( 'Icon', 'templines-helper-core' ),
+                'type'             => \Elementor\Controls_Manager::ICONS,
+                'default'          => [
+                    'value'   => 'fas fa-star',
+                    'library' => 'fa-solid',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'image_three',
+            [
+                'label' => __( 'Choose Image', 'templines-helper-core' ),
+                'type' => Controls_Manager::MEDIA,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'default' => [
+                    'url' => Utils::get_placeholder_image_src(),
+                ],
+                'condition' => [
+                    'icon-box-style' => array('style-six'),
                 ],
             ]
         );
@@ -129,7 +168,7 @@ class Templines_Button extends Widget_Base {
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
-                'selector' => '{{WRAPPER}} .fl-default-button',
+                'selector' => '{{WRAPPER}} .link__template',
             ]
         );
         //Color
@@ -143,7 +182,7 @@ class Templines_Button extends Widget_Base {
                     'value' => \Elementor\Core\Schemes\Color::COLOR_1,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .fl-default-button' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .link__template' => 'color: {{VALUE}}',
                 ],
                 'default' => '#ffffff'
             ]
@@ -158,7 +197,7 @@ class Templines_Button extends Widget_Base {
                     'value' => \Elementor\Core\Schemes\Color::COLOR_1,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .fl-default-button:hover' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .link__template:hover' => 'color: {{VALUE}}',
                 ],
                 'default' => '#ffffff'
             ]
@@ -174,7 +213,7 @@ class Templines_Button extends Widget_Base {
                     'value' => \Elementor\Core\Schemes\Color::COLOR_1,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .fl-default-button' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .link__template' => 'background-color: {{VALUE}}',
                 ],
                 'default' => '#f44153'
             ]
@@ -189,7 +228,7 @@ class Templines_Button extends Widget_Base {
                     'value' => \Elementor\Core\Schemes\Color::COLOR_1,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .fl-default-button:hover' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .link__template:hover' => 'background-color: {{VALUE}}',
                 ],
                 'default' => '#4da1f4'
             ]
@@ -200,27 +239,37 @@ class Templines_Button extends Widget_Base {
     }
 
     protected function render() {
-        $this->add_render_attribute( 'wrapper', 'class', 'page-builder-button-wrap' );
-        $this->add_render_attribute( 'button', 'class', 'fl-default-button' );
-        $this->add_render_attribute( 'button', 'role', 'button' );
-        $result = '';
-        $settings = $this->get_settings_for_display();
 
-        if ( ! empty( $settings['link']['url'] ) ) {
-            $this->add_link_attributes( 'button', $settings['link'] );
-        }
-
-        if ( ! empty( $settings['button_css_id'] ) ) {
-            $this->add_render_attribute( 'button', 'id', $settings['button_css_id'] );
-        }
-
-        $result .='<div '.$this->get_render_attribute_string('wrapper').'>';
-
-        $result .='<a '.$this->get_render_attribute_string('button').'>'.$settings['button_text'].'</a>';
-
-        $result .='</div>';
-
-        echo  $result;
-
+        $settings = $this->get_settings_for_display(); ?>
+			<div class="wrapper_link">
+				<a href="<?php echo $settings['link'];?>" class="link__template d-flex align-items-center justify-content-center" >
+                    <div class="text"><?php echo $settings['button_text'];?></div>
+					<?php if( $settings['icon_svg_three']['value'] == !''  ){
+					
+						echo '<span class="d-flex align-items-center justify-content-center" >';
+							\Elementor\Icons_Manager::render_icon( $settings['icon_svg_three'], [ 'aria-hidden' => 'true' ]  ); 
+						echo '</span>';
+					} ?>
+                </a>
+			</div>	
+<?php
     }
+	
+	protected function content_template() {
+		?>
+		<#
+		var iconHTML = elementor.helpers.renderIcon( view, settings.icon_svg_three, { 'aria-hidden': true }, 'i' , 'object' );
+		#>
+		<div class="wrapper_link">
+				<a href="{{{settings.link}}}" class="link__template d-flex align-items-center justify-content-center" >
+                    <div class="text">{{{settings.button_text}}}</div>
+						
+						<span class="d-flex align-items-center justify-content-center" >
+							{{{ iconHTML.value }}}
+						</span>
+					
+                </a>
+			</div>	
+		<?php
+	}
 }
