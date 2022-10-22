@@ -46,6 +46,9 @@ class Templines_Featured_New_Button extends Widget_Base {
 		];
 
 	}
+	
+
+
 
     protected function register_controls() {
         $this->start_controls_section(
@@ -239,10 +242,12 @@ class Templines_Featured_New_Button extends Widget_Base {
     }
 
     protected function render() {
-
+		$this->add_render_attribute( 'wrapper', 'class', 'wrapper_link' );
+		$this->add_render_attribute( 'button', 'class', 'link__template d-flex align-items-center justify-content-center' );
         $settings = $this->get_settings_for_display(); ?>
-			<div class="wrapper_link">
-				<a href="<?php echo $settings['link'];?>" class="link__template d-flex align-items-center justify-content-center" >
+		
+			<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
+				<a href="<?php echo $settings['link'];?>" <?php echo $this->get_render_attribute_string( 'button' ); ?>>
                     <div class="text"><?php echo $settings['button_text'];?></div>
 					<?php if( $settings['icon_svg_three']['value'] == !''  ){
 					
@@ -254,22 +259,6 @@ class Templines_Featured_New_Button extends Widget_Base {
 			</div>	
 <?php
     }
+
 	
-	protected function content_template() {
-		?>
-		<#
-		var iconHTML = elementor.helpers.renderIcon( view, settings.icon_svg_three, { 'aria-hidden': true }, 'i' , 'object' );
-		#>
-		<div class="wrapper_link">
-				<a href="{{{settings.link}}}" class="link__template d-flex align-items-center justify-content-center" >
-                    <div class="text">{{{settings.button_text}}}</div>
-						
-						<span class="d-flex align-items-center justify-content-center" >
-							{{{ iconHTML.value }}}
-						</span>
-					
-                </a>
-			</div>	
-		<?php
-	}
 }
