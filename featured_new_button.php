@@ -206,37 +206,65 @@ class Templines_Featured_New_Button extends Widget_Base {
             ]
         );
         //Background
-        $this->add_control(
-            'bg_color',
-            [
-                'label' => __( 'Background Color', 'plugin-domain' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'scheme' => [
-                    'type' => \Elementor\Core\Schemes\Color::get_type(),
-                    'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .link__template' => 'background-color: {{VALUE}}',
-                ],
-                'default' => '#f44153'
-            ]
+		$this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'background_color',
+				'label' => esc_html__( 'Background color ', 'templines-helper-core' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .link__template',
+				'fields_options' => [
+				'background' => [
+					'label' => esc_html__('Background color ', 'templines-helper-core')
+					],
+				],
+			]
         );
-        $this->add_control(
-            'bg_color_hv',
-            [
-                'label' => __( 'Background Color Hover', 'plugin-domain' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'scheme' => [
-                    'type' => \Elementor\Core\Schemes\Color::get_type(),
-                    'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .link__template:hover' => 'background-color: {{VALUE}}',
-                ],
-                'default' => '#4da1f4'
-            ]
+		
+		$this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'background_color_hover',
+				'label' => esc_html__( 'Background color :hover', 'templines-helper-core' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .link__template:hover ',
+				'fields_options' => [
+				'background' => [
+					'label' => esc_html__('Background color :hover', 'templines-helper-core')
+					],
+				],
+			]
         );
 
+		$this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'background_color_icon',
+				'label' => esc_html__( 'Background color icon', 'templines-helper-core' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .link__template span',
+				'fields_options' => [
+				'background' => [
+					'label' => esc_html__('Background color icon', 'templines-helper-core')
+					],
+				],
+			]
+        );
+		
+		$this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'background_color_icon_hover',
+				'label' => esc_html__( 'Background color icon:hover', 'templines-helper-core' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .link__template:hover span',
+				'fields_options' => [
+				'background' => [
+					'label' => esc_html__('Background color icon:hover', 'templines-helper-core')
+					],
+				],
+			]
+        );
 
         $this->end_controls_section();
     }
@@ -249,12 +277,12 @@ class Templines_Featured_New_Button extends Widget_Base {
 			<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
 				<a href="<?php echo $settings['link'];?>" <?php echo $this->get_render_attribute_string( 'button' ); ?>>
                     <div class="text"><?php echo $settings['button_text'];?></div>
-					<?php if( $settings['icon_svg_three']['value'] == !''  ){
+					<?php if( $settings['icon_svg_three']['value'] == !''  ): ?>
 					
-						echo '<span class="d-flex align-items-center justify-content-center" >';
-							\Elementor\Icons_Manager::render_icon( $settings['icon_svg_three'], [ 'aria-hidden' => 'true' ]  ); 
-						echo '</span>';
-					} ?>
+						<span class="d-flex align-items-center justify-content-center" >
+						<?php	\Elementor\Icons_Manager::render_icon( $settings['icon_svg_three'], [ 'aria-hidden' => 'true' ]  ); ?>
+						</span>
+					<?php endif; ?>
                 </a>
 			</div>	
 <?php

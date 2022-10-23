@@ -61,6 +61,38 @@ class Templines_Featured_Items extends Widget_Base {
             ]
         );
 		
+		$this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'background',
+				'label' => esc_html__( 'Background', 'templines-helper-core' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .hand__picked-item',
+				'fields_options' => [
+				'background' => [
+					'label' => esc_html__('Background color', 'templines-helper-core')
+					],
+				],
+			]
+        );
+		
+		$this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'background_hover',
+				'label' => esc_html__( 'Background:hover', 'templines-helper-core' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .hand__picked-item:hover',
+				'fields_options' => [
+				'background' => [
+					'label' => esc_html__('Background:hover', 'templines-helper-core')
+					],
+				],
+			]
+        );
+		
+		
+		
 		$this->add_control(
             'icon_svg_three',
             [
@@ -92,37 +124,7 @@ class Templines_Featured_Items extends Widget_Base {
             ]
         );
 					
-		$this->add_control(
-            'background_color',
-            [
-                'label' => __( 'Background color', 'templines-helper-core' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'scheme' => [
-                    'type' => \Elementor\Core\Schemes\Color::get_type(),
-                    'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .hand__picked-item' => 'color: {{VALUE}}',
-                ],
-                'default' => '#ffffff'
-            ]
-        );
 		
-		 $this->add_control(
-            'background_color_hv',
-            [
-                'label' => __( 'Background Hover', 'templines-helper-core' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'scheme' => [
-                    'type' => \Elementor\Core\Schemes\Color::get_type(),
-                    'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .hand__picked-item:hover' => 'color: {{VALUE}}',
-                ],
-                'default' => '#ffffff'
-            ]
-        );
 		
 		$this->add_control(
             'title_three',
