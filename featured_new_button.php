@@ -39,10 +39,10 @@ class Templines_Featured_New_Button extends Widget_Base {
 	
 	public function get_style_depends() {
 
-		wp_register_style( 'featured_reviews', plugins_url( '../assets/css/featured_new_button.css', __FILE__ ) );
+		wp_register_style( 'featured_new_button', plugins_url( '../assets/css/featured_new_button.css', __FILE__ ) );
 
 		return [
-			'featured_reviews',
+			'featured_new_button',
 		];
 
 	}

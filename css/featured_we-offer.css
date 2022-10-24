@@ -1,0 +1,104 @@
+/*--------------------We Offer--------------------*/
+.we__offer {
+  background: url(/img/we__offer.jpg) no-repeat top left;
+  height: 100%;
+  height: 520px;
+  padding-top: 105px;
+  display: block;
+}
+.we__offer-content {
+  margin-bottom: 80px;
+}
+.we__offer h2 {
+  font-size: 48px;
+  color: white;
+  font-weight: bold;
+  position: relative;
+}
+.we__offer h2::before {
+  content: '';
+  background: url(/img/svg/icon-dots.svg) no-repeat center;
+  position: absolute;
+  left: -226px;
+  top: 3px;
+  width: 113px;
+  height: 106px;
+}
+.we__offer p {
+  font-size: 14px;
+  color: white;
+  line-height: 3.429;
+  text-align: center;
+}
+.we__offer-item {
+  background-color: #fff;
+}
+.we__offer-item svg {
+	max-width:105px;
+	width:100%;
+	height:auto;
+}
+.we__offer-item .title {
+  font-size: 22px;
+  color: #222222;
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: left;
+  margin-bottom: 25px;
+}
+.we__offer-item p {
+  font-size: 17px;
+  color: #444444;
+  line-height: 1.765;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+.we__offer-card .icon-wrap{
+	margin-bottom:2.31rem;
+}
+.we__offer-card {
+  min-width: 380px;
+  min-height: 320px;
+  padding: 52px;
+  border-radius: 2px;
+  background-color: white;
+  -webkit-box-shadow: 0px 5px 38.25px 6.75px rgba(0, 0, 0, 0.09);
+          box-shadow: 0px 5px 38.25px 6.75px rgba(0, 0, 0, 0.09);
+}
+.we__offer-card:not(:last-child) {
+  border-right: 1px solid #ddd;
+}
+.we__offer .link__template {
+  max-width: 300px;
+  width: 100%;
+  height: 60px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 17px;
+  font-family: inherit;
+  font-weight: 700;
+  background-color: #de2929;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  border: none;
+  margin: 0 auto;
+}
+.we__offer .link__template .text {
+  width: 100%;
+  text-align: center;
+}
+.we__offer .link__template span {
+  display: block;
+  width: 80px;
+  background-color: #ab1212;
+  height: 60px;
+}
+.we__offer .link__template span svg {
+  fill: #fff;
+}
+.we__offer .link__template:hover {
+  color: #fff;
+  -webkit-box-shadow: 0px 10px 19px -11px rgba(0, 0, 0, 0.61);
+          box-shadow: 0px 10px 19px -11px rgba(0, 0, 0, 0.61);
+}
